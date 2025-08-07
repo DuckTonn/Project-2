@@ -81,8 +81,8 @@ def main():
                         action = agent.plan_next_action(world.agent_pos, world.agent_dir, world)
                         _execute_action(world, action)
                         agent_action_count += 1
-                        print(f"Executed action: {action}")                
-                    if agent_action_count % 5 == 0:
+                        print(f"Executed action: {action}")
+                    if agent_action_count % 5 == 0 and ui.ADVANCE_MODE:
                         print(f"Moving Wumpus...")
                         moving_module.update(world, ui, agent)
 
@@ -94,7 +94,7 @@ def main():
                 _execute_action(world, action)
                 agent_action_count += 1
                 auto_move_timer = 0
-            if agent_action_count % 5 == 0:
+            if agent_action_count % 5 == 0 and ui.ADVANCE_MODE:
                 moving_module.update(world, ui, agent)
         state = world.is_game_over()
         if state != "continue" and not game_over:

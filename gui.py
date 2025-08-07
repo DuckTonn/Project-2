@@ -63,6 +63,7 @@ class GUI:
         self.show_dangers = False
         self.show_gold = False
         self.show_config_popup = False
+        self.ADVANCE_MODE = False
     def _update(self, new_world, new_agent):
         """Update the GUI with a new world state."""
         self.world = new_world
@@ -93,7 +94,7 @@ class GUI:
             ("Show All", "toggle_all"),
             ("Reset Game", "reset_game"),
             ("New Seed", "new_seed"),
-            ("Config", "config"),
+            ("Advance", "advance"),
         ]
         buttons = []
         for idx, (label, action) in enumerate(configs):
@@ -277,7 +278,8 @@ class GUI:
                 color = self.GREEN
             elif action == "step_mode" and self.mode == GameMode.STEP:
                 color = self.GREEN
-
+            elif action == "advance" and self.ADVANCE_MODE:
+                color = self.GREEN
             pygame.draw.rect(self.screen, color, rect)
             pygame.draw.rect(self.screen, self.WHITE, rect, 2)
             label = self.small_font.render(btn["label"], True, self.WHITE)
@@ -304,8 +306,8 @@ class GUI:
                     self.show_gold = not self.show_gold
                     self.show_dangers = not self.show_dangers
                     return None
-                elif action == "config":
-                    self.show_config_popup = not self.show_config_popup
+                elif action == "advance":
+                    self.ADVANCE_MODE = not self.ADVANCE_MODE
                     return None
                 return action
         return None
